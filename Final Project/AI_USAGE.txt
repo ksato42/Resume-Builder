@@ -1,0 +1,27 @@
+# AI Usage
+
+1. AI-Generated
+The following elements were initially drafted or scaffolded using Generative AI as a starting point:
+
+- index.html: Initial layout structure and boilerplate.
+- Content Templates: Section headings and form field placeholders.
+- UI Copy: Initial suggestions for instructional text and labels.
+- UI Prototype: First-pass visual hierarchy and component arrangement.
+
+2. Non-AI Part
+For the parts I learned in the class, I tried to do it by myself
+
+- server.js: Full implementation of Express.js and SQLite integration.
+- Database Design: Schema definition, resume versioning, and selection system data structures.
+- REST API: Custom endpoints for data management and interaction.
+- Gemini API Logic: Implementation of connection logic and robust 429 (Rate Limit) fallback handling.
+- public/js/app.js: Comprehensive Single Page Application (SPA) control.
+- Frontend Logic: Form submission, API communication, real-time preview rendering, and print handling.
+- public/css/styles.css: Manual UI styling, layout adjustments, and visual polish.
+- Optimization: Lighthouse audit remediation, accessibility fixes, and performance tuning.
+- PDF Workflow: Design and implementation of the PDF output/print flow.
+- Documentation: Final organization and writing of README and AI_USAGE files.
+
+Conclusion:
+In this assignment, I used AI to do the basic part which I've done a lot in past assignments. And for the part I didn't get
+many practices, I tried using code from the lecture or non AI generated website to gain more knowledge

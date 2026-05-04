@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="ResumeForge Studio helps students build tailored resumes with job selection, AI suggestions, and print-ready PDF export."
+    />
+    <title>ResumeForge Studio</title>
+    <link rel="stylesheet" href="/vendor/bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero-panel">
+        <div class="container py-4 py-lg-5">
+          <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-4">
+            <div>
+              <div class="brand-lockup">
+                <div class="brand-mark">
+                  <span>RF</span>
+                </div>
+                <div>
+                  <p class="eyebrow mb-1">University Final Project</p>
+                  <h1 class="display-6 mb-2">ResumeForge Studio</h1>
+                </div>
+              </div>
+              <p class="hero-copy mb-0">
+                Build polished resume versions from one master profile, review wording with Gemini,
+                and switch between digital and print-ready layouts without leaving the page.
+              </p>
+            </div>
+            <div class="hero-actions">
+              <button class="btn btn-light btn-lg" data-bs-toggle="modal" data-bs-target="#thanksModal">
+                Library Credits
+              </button>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="container my-4 my-lg-5">
+        <nav class="nav nav-pills nav-fill section-tabs mb-4" id="sectionTabs">
+          <button class="nav-link active" data-section="dashboard">Dashboard</button>
+          <button class="nav-link" data-section="builder">Content Builder</button>
+          <button class="nav-link" data-section="versions">Resume Versions</button>
+          <button class="nav-link" data-section="preview">Preview & Print</button>
+          <button class="nav-link" data-section="assistant">AI Assistant</button>
+        </nav>
+
+        <section id="section-dashboard" class="app-section active">
+          <div class="row g-4">
+            <div class="col-lg-8">
+              <div class="card feature-card h-100">
+                <div class="card-body">
+                  <p class="section-label">Project Overview</p>
+                  <h2 class="h3">One profile, many tailored resumes</h2>
+                  <p>
+                    Enter all your experience once, then create targeted resume versions by choosing
+                    which jobs and responsibilities belong in each application.
+                  </p>
+                  <div class="row g-3 stats-grid" id="statsGrid"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card feature-card h-100">
+                <div class="card-body">
+                  <p class="section-label">Workflow</p>
+                  <ol class="workflow-list mb-0">
+                    <li>Add jobs, skills, awards, and certifications.</li>
+                    <li>Create a resume version for a target role.</li>
+                    <li>Select only the strongest experiences.</li>
+                    <li>Review content with Gemini.</li>
+                    <li>Switch between digital and print layouts.</li>
+                  </ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-builder" class="app-section">
+          <div class="row g-4">
+            <div class="col-xl-6">
+              <div class="card feature-card">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                      <p class="section-label">Data Entry</p>
+                      <h2 class="h4 mb-0">Jobs & Responsibilities</h2>
+                    </div>
+                  </div>
+                  <form id="jobForm" class="row g-3">
+                    <div class="col-md-6">
+                      <label for="jobTitle" class="form-label">Job Title</label>
+                      <input type="text" class="form-control" id="jobTitle" required />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="jobCompany" class="form-label">Company</label>
+                      <input type="text" class="form-control" id="jobCompany" required />
+                    </div>
+                    <div class="col-md-6">
+                      <label for="jobLocation" class="form-label">Location</label>
+                      <input type="text" class="form-control" id="jobLocation" />
+                    </div>
+                    <div class="col-md-3">
+                      <label for="jobStartDate" class="form-label">Start Date</label>
+                      <input type="month" class="form-control" id="jobStartDate" />
+                    </div>
+                    <div class="col-md-3">
+                      <label for="jobEndDate" class="form-label">End Date</label>
+                      <input type="month" class="form-control" id="jobEndDate" />
+                    </div>
+                    <div class="col-12">
+                      <label for="jobSummary" class="form-label">Summary</label>
+                      <textarea class="form-control" id="jobSummary" rows="3"></textarea>
+                    </div>
+                    <div class="col-12">
+                      <label for="jobResponsibilities" class="form-label">Responsibilities</label>
+                      <textarea
+                        class="form-control"
+                        id="jobResponsibilities"
+                        rows="5"
+                        placeholder="One responsibility per line"
+                      ></textarea>
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary">Save Job</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xl-6">
+              <div class="row g-4">
+                <div class="col-12">
+                  <div class="card feature-card">
+                    <div class="card-body">
+                      <p class="section-label">Data Entry</p>
+                      <h2 class="h4">Skills</h2>
+                      <form id="skillForm" class="row g-3">
+                        <div class="col-md-5">
+                          <label for="skillCategory" class="form-label">Category</label>
+                          <input type="text" class="form-control" id="skillCategory" placeholder="Frontend" required />
+                        </div>
+                        <div class="col-md-4">
+                          <label for="skillName" class="form-label">Skill</label>
+                          <input type="text" class="form-control" id="skillName" required />
+                        </div>
+                        <div class="col-md-3">
+                          <label for="skillLevel" class="form-label">Level</label>
+                          <input type="text" class="form-control" id="skillLevel" placeholder="Advanced" />
+                        </div>
+                        <div class="col-12">
+                          <button type="submit" class="btn btn-outline-primary">Add Skill</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-12">
+                  <div class="card feature-card">
+                    <div class="card-body">
+                      <p class="section-label">Data Entry</p>
+                      <h2 class="h4">Certifications & Awards</h2>
+                      <div class="row g-4">
+                        <div class="col-lg-6">
+                          <form id="certificationForm" class="row g-3">
+                            <div class="col-12">
+                              <label for="certificationName" class="form-label">Certification</label>
+                              <input type="text" class="form-control" id="certificationName" required />
+                            </div>
+                            <div class="col-12">
+                              <label for="certificationIssuer" class="form-label">Issuer</label>
+                              <input type="text" class="form-control" id="certificationIssuer" />
+                            </div>
+                            <div class="col-12">
+                              <label for="certificationDate" class="form-label">Issue Date</label>
+                              <input type="month" class="form-control" id="certificationDate" />
+                            </div>
+                            <div class="col-12">
+                              <label for="certificationDetails" class="form-label">Details</label>
+                              <textarea class="form-control" id="certificationDetails" rows="2"></textarea>
+                            </div>
+                            <div class="col-12">
+                              <button type="submit" class="btn btn-outline-primary">Add Certification</button>
+                            </div>
+                          </form>
+                        </div>
+
+                        <div class="col-lg-6">
+                          <form id="awardForm" class="row g-3">
+                            <div class="col-12">
+                              <label for="awardTitle" class="form-label">Award</label>
+                              <input type="text" class="form-control" id="awardTitle" required />
+                            </div>
+                            <div class="col-12">
+                              <label for="awardIssuer" class="form-label">Issuer</label>
+                              <input type="text" class="form-control" id="awardIssuer" />
+                            </div>
+                            <div class="col-12">
+                              <label for="awardDate" class="form-label">Award Date</label>
+                              <input type="month" class="form-control" id="awardDate" />
+                            </div>
+                            <div class="col-12">
+                              <label for="awardDetails" class="form-label">Details</label>
+                              <textarea class="form-control" id="awardDetails" rows="2"></textarea>
+                            </div>
+                            <div class="col-12">
+                              <button type="submit" class="btn btn-outline-primary">Add Award</button>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-versions" class="app-section">
+          <div class="row g-4">
+            <div class="col-lg-4">
+              <div class="card feature-card h-100">
+                <div class="card-body">
+                  <p class="section-label">Selection System</p>
+                  <h2 class="h4">Create Resume Version</h2>
+                  <form id="resumeVersionForm" class="row g-3">
+                    <div class="col-12">
+                      <label for="resumeVersionName" class="form-label">Version Name</label>
+                      <input type="text" class="form-control" id="resumeVersionName" placeholder="Software Engineer Internship" required />
+                    </div>
+                    <div class="col-12">
+                      <label for="resumeTargetRole" class="form-label">Target Role</label>
+                      <input type="text" class="form-control" id="resumeTargetRole" />
+                    </div>
+                    <div class="col-12">
+                      <label for="resumeSummary" class="form-label">Professional Summary</label>
+                      <textarea class="form-control" id="resumeSummary" rows="4"></textarea>
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary">Create Version</button>
+                    </div>
+                  </form>
+
+                  <hr class="my-4" />
+
+                  <label for="resumeVersionSelect" class="form-label">Active Version</label>
+                  <select id="resumeVersionSelect" class="form-select mb-3">
+                    <option value="">Choose a version</option>
+                  </select>
+                  <p class="small text-secondary mb-0">
+                    Select a version to choose which jobs and bullet points appear in that tailored resume.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-8">
+              <div class="card feature-card h-100">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                      <p class="section-label">Selection System</p>
+                      <h2 class="h4 mb-0">Experience Selector</h2>
+                    </div>
+                    <button id="saveSelectionsButton" class="btn btn-outline-primary" disabled>
+                      Save Selections
+                    </button>
+                  </div>
+                  <div id="selectionEmptyState" class="empty-state">
+                    Create or select a resume version to begin curating job entries.
+                  </div>
+                  <div id="selectionBuilder" class="d-none"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-preview" class="app-section">
+          <div class="row g-4">
+            <div class="col-12">
+              <div class="card feature-card">
+                <div class="card-body">
+                  <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-4">
+                    <div>
+                      <p class="section-label">Layout Engine</p>
+                      <h2 class="h4 mb-0">Digital and Print Preview</h2>
+                    </div>
+                    <div class="d-flex gap-2">
+                      <button id="digitalViewButton" class="btn btn-primary">Digital View</button>
+                      <button id="printViewButton" class="btn btn-outline-primary">Print Layout</button>
+                      <button id="printResumeButton" class="btn btn-outline-dark">Print</button>
+                    </div>
+                  </div>
+                  <div id="resumePreview" class="resume-preview digital-view">
+                    <div class="preview-empty">Select a resume version to render a preview.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="section-assistant" class="app-section">
+          <div class="row g-4">
+            <div class="col-lg-5">
+              <div class="card feature-card h-100">
+                <div class="card-body">
+                  <p class="section-label">AI Assistant</p>
+                  <h2 class="h4">Gemini Resume Reviewer</h2>
+                  <form id="aiReviewForm" class="row g-3">
+                    <div class="col-12">
+                      <label for="aiContext" class="form-label">Context</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="aiContext"
+                        placeholder="Targeting frontend developer internship"
+                      />
+                    </div>
+                    <div class="col-12">
+                      <label for="aiText" class="form-label">Text To Review</label>
+                      <textarea
+                        class="form-control"
+                        id="aiText"
+                        rows="10"
+                        placeholder="Paste a job summary, responsibility, or professional summary here"
+                        required
+                      ></textarea>
+                    </div>
+                    <div class="col-12">
+                      <button type="submit" class="btn btn-primary">Review with Gemini</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-lg-7">
+              <div class="card feature-card h-100">
+                <div class="card-body">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <div>
+                      <p class="section-label">AI Assistant</p>
+                      <h2 class="h4 mb-0">Suggestions</h2>
+                    </div>
+                  </div>
+                  <pre id="aiResponse" class="ai-response mb-0">AI suggestions will appear here.</pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+      <div id="appToast" class="toast align-items-center text-bg-dark border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+          <div class="toast-body" id="toastMessage">Saved successfully.</div>
+          <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="thanksModal" tabindex="-1" aria-labelledby="thanksModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h2 class="modal-title fs-5" id="thanksModalLabel">Thank You</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="mb-2">This project uses the following libraries and tools:</p>
+            <ul class="mb-0">
+              <li>Bootstrap 5 for local UI components and layout.</li>
+              <li>Express for RESTful backend services.</li>
+              <li>SQLite for lightweight persistent storage.</li>
+              <li>Google Gemini API for AI-powered writing suggestions.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
+</html>
